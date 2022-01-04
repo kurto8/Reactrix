@@ -1,17 +1,50 @@
 import * as React from 'react';
 import { useDrag, DragSourceMonitor } from 'react-dnd';
+import * as shortid from 'shortid';
 import { Button, ListItem } from '@material-ui/core';
 
+import EachReusableComponent from './EachReusableComponent';
+
+const SIDEBAR_ITEM = 'sidebarItem';
+
 export default function DraggableComponent() {
-  const [reusableComponents, setReusableComponents] = React.useState([
-    'Container Component 1',
-    'Container Component 2',
-    'Presentational Component 1',
-    'Presentational Component 2',
-    'Presentational Component 3',
-  ]);
+  const reusableComponents = [
+    {
+      id: shortid.generate(),
+      type: SIDEBAR_ITEM,
+      component: {
+        type: 'component',
+        content: 'Container 4',
+      },
+    },
+    {
+      id: shortid.generate(),
+      type: SIDEBAR_ITEM,
+      component: {
+        type: 'component',
+        content: 'Container 5',
+      },
+    },
+    {
+      id: shortid.generate(),
+      type: SIDEBAR_ITEM,
+      component: {
+        type: 'component',
+        content: 'Child 4',
+      },
+    },
+    {
+      id: shortid.generate(),
+      type: SIDEBAR_ITEM,
+      component: {
+        type: 'component',
+        content: 'Child 5',
+      },
+    },
+  ];
+
   const [collected, drag, dragPreview] = useDrag(() => ({
-    type: 'TREE',
+    type: 'BOX',
     collect: (monitor: DragSourceMonitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -24,14 +57,8 @@ export default function DraggableComponent() {
     <div ref={dragPreview} />
   ) : (
     <div>
-      {reusableComponents.map((text, index) => (
-        <div ref={drag} {...collected}>
-          <ListItem>
-            <Button variant='outlined' size='medium' key={index}>
-              {text}
-            </Button>
-          </ListItem>
-        </div>
+      {Object.values(reusableComponents).map((ele) => (
+        <EachReusableComponent key={ele.id} content={ele.component.content} />
       ))}
     </div>
   );

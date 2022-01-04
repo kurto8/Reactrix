@@ -60,7 +60,9 @@ export default function ComponentLibrary(): any {
                 <Typography variant='subtitle1'>Reusable Components</Typography>
               </ListItemText>
             </ListItem>
-            <ReusableComponents />
+            <ListItem>
+              <ReusableComponents />
+            </ListItem>
           </List>
         </Box>
       </Drawer>

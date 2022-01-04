@@ -2,7 +2,11 @@ import * as React from 'react';
 import { useDrag, DragSourceMonitor } from 'react-dnd';
 import { Button } from '@material-ui/core';
 
-export default function DraggableComponent() {
+interface component {
+  content: string;
+}
+
+export default function DraggableComponent({ content }: component) {
   const [collected, drag, dragPreview] = useDrag(() => ({
     type: 'BOX',
     collect: (monitor: DragSourceMonitor) => ({
@@ -17,8 +21,8 @@ export default function DraggableComponent() {
     <div ref={dragPreview} />
   ) : (
     <div ref={drag} {...collected}>
-      <Button variant='outlined' size='small' key='New Component'>
-        New Component
+      <Button variant='outlined' size='small' key='Reusable Component'>
+        {content}
       </Button>
     </div>
   );
