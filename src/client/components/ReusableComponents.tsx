@@ -1,17 +1,10 @@
 import * as React from 'react';
 import { useDrag, DragSourceMonitor } from 'react-dnd';
-import { Button, ListItem } from '@material-ui/core';
+import OrgTreeComponent, { useTree } from 'react-drag-hierarchy-tree';
 
 export default function DraggableComponent() {
-  const [reusableComponents, setReusableComponents] = React.useState([
-    'Container Component 1',
-    'Container Component 2',
-    'Presentational Component 1',
-    'Presentational Component 2',
-    'Presentational Component 3',
-  ]);
   const [collected, drag, dragPreview] = useDrag(() => ({
-    type: 'TREE',
+    type: 'BOX',
     collect: (monitor: DragSourceMonitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -20,19 +13,7 @@ export default function DraggableComponent() {
     },
   }));
 
-  return collected.isDragging ? (
-    <div ref={dragPreview} />
-  ) : (
-    <div>
-      {reusableComponents.map((text, index) => (
-        <div ref={drag} {...collected}>
-          <ListItem>
-            <Button variant='outlined' size='medium' key={index}>
-              {text}
-            </Button>
-          </ListItem>
-        </div>
-      ))}
-    </div>
-  );
+  const { treeRef } = useTree();
+
+  return collected.isDragging ? <div ref={dragPreview} /> : <div></div>;
 }

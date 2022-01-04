@@ -12,6 +12,7 @@ import Navbar from './components/Navbar';
 import ComponentLibrary from './containers/ComponentLibrary';
 import ComponentTree from './containers/ComponentTree';
 import ComponentDetails from './containers/ComponentDetails';
+import PerformanceMetrics from './containers/PerformanceMetrics';
 
 const App = () => (
   <div>
@@ -21,6 +22,7 @@ const App = () => (
         <ComponentLibrary />
         {/* <ComponentTree /> */}
         {/* <ComponentDetails /> */}
+        <PerformanceMetrics />
       </ThemeProvider>
     </DndProvider>
   </div>
